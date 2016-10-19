@@ -10,3 +10,18 @@ Write-Host $msg
 [int] $int = 999
 Write-Host $str.GetType()
 Write-Host $int.GetType()
+
+# String literal
+$msg = "world"
+Write-Host "hello $msg"
+Write-Host "hello ${msg}!"
+
+# String append
+Write-Host ("hello" + " " + "world")
+
+# Heredocument
+Write-Host @"
+One
+Two
+Three
+"@
