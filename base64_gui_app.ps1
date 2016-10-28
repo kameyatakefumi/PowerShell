@@ -1,4 +1,5 @@
 Add-Type -AssemblyName PresentationFramework
+Add-Type -AssemblyName System.Windows.Forms
 
 $xaml = @'
 <Window
@@ -75,6 +76,7 @@ $clearButton.Add_Click({
     $outputTextBox.Clear()
 })
 
-# $frm.Top  = 0
-# $frm.Left = 0
+$primaryScreen = [System.Windows.Forms.Screen]::PrimaryScreen
+$frm.Top  = ($primaryScreen.Bounds.Height / 2) - ($frm.Height / 2)
+$frm.Left = ($primaryScreen.Bounds.Width  / 2) - ($frm.Width  / 2)
 $frm.ShowDialog()
