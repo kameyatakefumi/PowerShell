@@ -3,7 +3,7 @@ Add-Type -AssemblyName PresentationFramework
 $xaml = @'
 <Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    Title="パネルレイアウト" Width="640" Height="400">
+    Title="パネルレイアウト" Width="800" Height="600">
 
     <Grid>
         <Grid.RowDefinitions>
