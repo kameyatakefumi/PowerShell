@@ -63,6 +63,9 @@ $copyToClipboardFromOutputButton = $frm.FindName("CopyToClipboardFromOutputButto
 $copyToClipboardFromOutputButton.Add_Click({
 
     $outputTextBox = $frm.FindName("OutputTextBox")
+
+    # Change to SJIS
+    $OutputEncoding = [Console]::OutputEncoding
     $outputTextBox.Text | Clip
 })
 
