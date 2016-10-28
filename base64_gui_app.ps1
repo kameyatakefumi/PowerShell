@@ -35,49 +35,40 @@ $xaml = @'
 
 $frm = [System.Windows.Markup.XamlReader]::Parse($xaml)
 
-$encodeButton = $frm.FindName("EncodeButton")
-$encodeButton.Add_Click({
+$frm.FindName("EncodeButton").Add_Click({
 
-    $inputTextBox = $frm.FindName("InputTextBox")
+    $str = $frm.FindName("InputTextBox").Text
 
-    $byte = [System.Text.Encoding]::GetEncoding("shift_jis").GetBytes($inputTextBox.Text)
+    $byte = [System.Text.Encoding]::GetEncoding("shift_jis").GetBytes($str)
     $base64 = [System.Convert]::ToBase64String($byte)
 
-    $outputTextBox = $frm.FindName("OutputTextBox")
-    $outputTextBox.Text = $base64
+    $frm.FindName("OutputTextBox").Text = $base64
 })
 
-$decodeButton = $frm.FindName("DecodeButton")
-$decodeButton.Add_Click({
+$frm.FindName("DecodeButton").Add_Click({
 
-    $inputTextBox = $frm.FindName("InputTextBox")
+    $base64 = $frm.FindName("InputTextBox").Text
 
-    $byte = [System.Convert]::FromBase64String($inputTextBox.Text)
+    $byte = [System.Convert]::FromBase64String($base64)
     $str = [System.Text.Encoding]::GetEncoding("shift_jis").GetString($byte)
 
-    $outputTextBox = $frm.FindName("OutputTextBox")
-    $outputTextBox.Text = $str
+    $frm.FindName("OutputTextBox").Text = $str
 })
 
-$copyToClipboardFromOutputButton = $frm.FindName("CopyToClipboardFromOutputButton")
-$copyToClipboardFromOutputButton.Add_Click({
-
-    $outputTextBox = $frm.FindName("OutputTextBox")
+$frm.FindName("CopyToClipboardFromOutputButton").Add_Click({
 
     # Change to SJIS
     $OutputEncoding = [Console]::OutputEncoding
-    $outputTextBox.Text | Clip
+    $frm.FindName("OutputTextBox").Text | Clip
 })
 
-$clearButton = $frm.FindName("ClearButton")
-$clearButton.Add_Click({
+$frm.FindName("ClearButton").Add_Click({
 
-    $inputTextBox = $frm.FindName("InputTextBox")
-    $inputTextBox.Clear()
-
-    $outputTextBox = $frm.FindName("OutputTextBox")
-    $outputTextBox.Clear()
+    $frm.FindName("InputTextBox").Clear()
+    $frm.FindName("OutputTextBox").Clear()
 })
+
+$frm.FindName("InputTextBox").Focus()
 
 $primaryScreen = [System.Windows.Forms.Screen]::PrimaryScreen
 $frm.Top  = ($primaryScreen.Bounds.Height / 2) - ($frm.Height / 2)
